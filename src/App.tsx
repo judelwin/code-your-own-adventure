@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Landing from './pages/Landing'
-import Game from './pages/game'
+import Game from './pages/Game'
 
 function App() {
   return (
