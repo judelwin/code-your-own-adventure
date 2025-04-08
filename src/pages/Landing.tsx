@@ -23,7 +23,7 @@ const Landing = () => {
             initial={{ opacity: 1 }}
             animate={{ opacity: starting ? 0 : 1 }}
             transition={{ duration: 1 }}
-            className={`min-h-screen flex flex-col items-center justify-center bg-[#E8B6B6] border-20 border-[#CD9999] shadow-lg transition-all duration-1000 ${starting ? 'pointer-events-none' : ''
+            className={`min-h-screen flex flex-col items-center justify-center bg-[#6B705C] shadow-lg transition-all duration-1000 ${starting ? 'pointer-events-none' : ''
                 }`}
         >
             {!starting && (
@@ -31,11 +31,12 @@ const Landing = () => {
                     initial={{ opacity: 1 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="text-[64px] font-bold text-black mb-8 font-mono"
-                    style={{ textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}
+                    className="text-[64px] font-bold text-[#FFE8D6] mb-8 font-mono z-10 mb-20"
+                    style={{ textShadow: '0px 3px 3px #B7B7A4' }}
                 >
                     Voices of Tech
                 </motion.h1>
+                
             )}
 
 
@@ -46,7 +47,7 @@ const Landing = () => {
                         : { scale: 1, opacity: 1 }
                 }
                 transition={{ duration: 1 }}
-                className="z-10"
+                className="z-10 mb-4"
             >
                 <Terminal
                     allowStart
@@ -65,7 +66,7 @@ const Landing = () => {
                     initial={{ opacity: 1 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="mt-6 bg-[#CD9999] text-black text-[16px] font-bold w-[180px] h-[50px] rounded-[15px] border-2 border-black shadow-md hover:bg-[#B0C4B1] transition duration-300"
+                    className="border-3 border-[#B7B7A4] mt-6 bg-[#FFE8D6] text-black text-[16px] w-[180px] h-[50px] rounded-[15px] shadow-md hover:bg-[#DDBEA9] transition duration-300"
                 >
                     About
                 </motion.button>
