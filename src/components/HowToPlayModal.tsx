@@ -6,14 +6,18 @@ const HowToPlayModal = ({ onClose }: { onClose: () => void }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }} // smoother fade
       className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center"
     >
       <motion.div
         initial={{ scale: 0.9 }}
         animate={{ scale: 1 }}
         exit={{ scale: 0.9 }}
+        transition={{ duration: 0.3, ease: 'easeOut' }} // slower scale
         className="bg-[#505050] text-[#FFE8D6] p-6 rounded-xl w-[90%] max-w-md shadow-2xl border border-[#FFE8D6]/30"
       >
+        {/* content remains unchanged */}
+
         <h2 className="text-2xl font-bold mb-4 text-center bg-gradient-to-r from-[#80C7F2] via-[#E4C1F9] to-[#FFB5B5] text-transparent bg-clip-text">
           How to Play
         </h2>
