@@ -109,7 +109,7 @@ const Landing = () => {
     setStarting(true)
     setTimeout(() => {
       navigate('/game')
-    }, 1000)
+    }, 800)
   }
 
   return (
