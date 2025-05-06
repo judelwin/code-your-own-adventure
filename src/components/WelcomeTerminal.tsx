@@ -1,56 +1,28 @@
+// WelcomeTerminal.tsx
 import { motion } from 'framer-motion'
 import { useState, useRef, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useStats } from '../context/StatContext'
-
-type Option = {
-  input: string
-  response: string
-  effects: {
-    Academic: number
-    Social: number
-    Career: number
-    Energy: number
-  }
-}
-
-type Scenario = {
-  title: string
-  description: string
-  decision: string
-  options: Option[]
-}
 
 type Props = {
-  messages: string[]
-  setMessages: React.Dispatch<React.SetStateAction<string[]>>
-  scenario?: Scenario
+  initialMessages: string[]
   allowStart?: boolean
   onStart?: () => void
   setShowHowToPlay?: (visible: boolean) => void
-  onNext?: () => void
 }
 
-const Terminal = ({
-  messages,
-  setMessages,
-  scenario,
-  allowStart = false,
-  onStart,
-  setShowHowToPlay,
-  onNext,
-}: Props) => {
+const WelcomeTerminal = ({ initialMessages, allowStart = false, onStart, setShowHowToPlay }: Props) => {
   const [input, setInput] = useState('')
+  const [messages, setMessages] = useState(initialMessages)
   const bottomRef = useRef<HTMLDivElement>(null)
   const location = useLocation()
   const [hasShownModal, setHasShownModal] = useState(false)
-  const { updateStats } = useStats()
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
   useEffect(() => {
+    // Show modal if on game page for the first time
     if (location.pathname === '/game' && !hasShownModal) {
       setHasShownModal(true)
       setTimeout(() => {
@@ -64,30 +36,8 @@ const Terminal = ({
     const trimmed = input.trim().toLowerCase()
     if (!trimmed) return
 
-    // Scenario-based input (e.g., options 1, 2, etc.)
-    if (scenario) {
-      const match = scenario.options.find(
-        (opt, i) =>
-          trimmed === (i + 1).toString() || trimmed === opt.input.toLowerCase()
-      )
-
-      if (match) {
-        updateStats(match.effects)
-        setMessages((prev) => [...prev, `> ${trimmed}`, match.response])
-        setTimeout(() => {
-          setInput('')
-          if (onNext) onNext()
-        }, 500)
-        return
-      } else {
-        setMessages((prev) => [...prev, `> ${trimmed}`, `Unknown command: "${trimmed}"`])
-        setInput('')
-        return
-      }
-    }
-
-    // Default behavior (Landing page)
     setMessages((prev) => [...prev, `> ${trimmed}`])
+
     if (trimmed === 'help') {
       setMessages((prev) => [...prev, 'Available commands: "help", "start"'])
     } else if (trimmed === 'start' && allowStart) {
@@ -96,6 +46,7 @@ const Terminal = ({
     } else {
       setMessages((prev) => [...prev, `Unknown command: "${trimmed}"`])
     }
+
     setInput('')
   }
 
@@ -133,4 +84,4 @@ const Terminal = ({
   )
 }
 
-export default Terminal
+export default WelcomeTerminal
