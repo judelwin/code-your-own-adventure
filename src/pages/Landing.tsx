@@ -1,74 +1,101 @@
 import Terminal from '../components/Terminal'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+const TypingTitle = ({ text }: { text: string }) => {
+  const [index, setIndex] = useState(0)
+  const [cursorVisible, setCursorVisible] = useState(true)
+  const [finishedTyping, setFinishedTyping] = useState(false)
+
+  useEffect(() => {
+    if (!text) return
+
+    const typeInterval = setInterval(() => {
+      setIndex((prev) => {
+        if (prev >= text.length) {
+          clearInterval(typeInterval)
+          setFinishedTyping(true)
+          return prev
+        }
+        return prev + 1
+      })
+    }, 100)
+
+    const cursorInterval = setInterval(() => {
+      setCursorVisible((prev) => !prev)
+    }, 500)
+
+    return () => {
+      clearInterval(typeInterval)
+      clearInterval(cursorInterval)
+    }
+  }, [text])
+
+  return (
+    <h1
+      className="text-[36px] md:text-[56px] font-bold font-ibm-mono z-10 mb-20 tracking-wide bg-gradient-to-r from-[#80C7F2] via-[#E4C1F9] to-[#FFB5B5] text-transparent bg-clip-text"
+      style={{
+        textShadow: '0 0 6px rgba(255, 255, 255, 0.2), 0 0 10px rgba(255, 200, 255, 0.2)',
+      }}
+    >
+      {text.slice(0, index)}
+      {!finishedTyping && cursorVisible && (
+        <span className="inline-block w-[0.6ch] bg-[#FFE8D6] h-[1.1em] ml-[2px] align-middle" />
+      )}
+    </h1>
+  )
+}
+
+const floatingWords = [
+  { text: 'print("hello world!")', top: '8%', left: '50%' },
+  { text: 'college', top: '14%', left: '80%' },
+  { text: 'networking', top: '68%', left: '20%' },
+  { text: '010101', top: '75%', left: '12%' },
+  { text: 'internships', top: '82%', left: '25%' },
+  { text: 'burnout', top: '88%', left: '8%' },
+  { text: 'imposter syndrome', top: '90%', left: '35%' },
+  { text: 'rejection', top: '5%', left: '88%' },
+  { text: 'clubs', top: '72%', left: '30%' },
+  { text: 'hackathons', top: '40%', left: '70%' },
+  { text: 'diversity', top: '25%', left: '80%' },
+  { text: 'support', top: '53%', left: '30%' },
+  { text: '</>', top: '17%', left: '70%' },
+  { text: '{}', top: '60%', left: '15%' },
+  { text: 'java', top: '92%', left: '20%' },
+  { text: 'python', top: '5%', left: '75%' },
+]
 
 const FloatingCode = () => {
-    const items = ['print("hello world!)', 'college', 'networking', '010101', 'internships', 'stressed', 'overwhelmed', 'imposter syndrome']
-  
-    const count = 4
-  
-    const getPositionInDarkZone = () => {
-      const zone = Math.floor(Math.random() * 3)
-      if (zone === 0) {
-        // top-right
-        return {
-          top: `${Math.random() * 40}%`,
-          left: `${52 + Math.random() * 40}%`,
-        }
-      } else if (zone === 1) {
-        // bottom-left
-        return {
-          top: `${60 + Math.random() * 40}%`,
-          left: `${2 + Math.random() * 40}%`,
-        }
-      } else {
-        // center vertical band
-        return {
-          top: `${30 + Math.random() * 40}%`,
-          left: `${45 + Math.random() * 10}%`,
-        }
-      }
-    }
-  
-    return (
-      <>
-        {[...Array(count)].map((_, i) => {
-          const item = items[Math.floor(Math.random() * items.length)]
-          const opacity = 0.25 + Math.random() * 0.1
-          const size = 0.8 + Math.random() * 0.5
-          const duration = 4 + Math.random() * 3
-          const { top, left } = getPositionInDarkZone()
-  
-          return (
-            <motion.div
-              key={i}
-              className="absolute text-[#FFE8D6] font-ibm-mono pointer-events-none"
-              style={{
-                top,
-                left,
-                fontSize: `${size}rem`,
-                opacity,
-                zIndex: 0,
-              }}
-              animate={{
-                y: [-15, 15, -15],
-                opacity: [opacity - 0.1, opacity, opacity - 0.1],
-              }}
-              transition={{
-                duration,
-                repeat: Infinity,
-                repeatType: 'mirror',
-                ease: 'easeInOut',
-              }}
-            >
-              {item}
-            </motion.div>
-          )
-        })}
-      </>
-    )
-  }
+  return (
+    <>
+      {floatingWords.map((item, i) => (
+        <motion.div
+          key={i}
+          className="absolute text-[#FFE8D6] font-ibm-mono pointer-events-none"
+          style={{
+            top: item.top,
+            left: item.left,
+            fontSize: '1rem',
+            opacity: 0.35,
+            zIndex: 0,
+          }}
+          animate={{
+            y: [-5, 5, -5],
+          }}
+          transition={{
+            duration: 6 + Math.random() * 2,
+            repeat: Infinity,
+            repeatType: 'mirror',
+            ease: 'easeInOut',
+          }}
+        >
+          {item.text}
+        </motion.div>
+      ))}
+    </>
+  )
+}
 
 const Landing = () => {
   const navigate = useNavigate()
@@ -90,9 +117,7 @@ const Landing = () => {
       initial={{ opacity: 1 }}
       animate={{ opacity: starting ? 0 : 1 }}
       transition={{ duration: 1 }}
-      className={`min-h-screen flex flex-col items-center justify-center bg-[url('/b6.jpg')] bg-cover bg-center bg-no-repeat shadow-lg transition-all duration-1000 ${starting ? 'pointer-events-none' : ''
-      }`}
-      
+      className={`min-h-screen flex flex-col items-center justify-center bg-[url('/b6.jpg')] bg-cover bg-center bg-no-repeat shadow-lg transition-all duration-1000 ${starting ? 'pointer-events-none' : ''}`}
     >
       {/* Background floating characters */}
       <FloatingCode />
@@ -101,52 +126,41 @@ const Landing = () => {
       <div className="absolute inset-0 pointer-events-none z-0 crt-overlay" />
 
       {/* Title */}
-      {!starting && (
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-[48px] font-bold text-[#FFE8D6] z-10 mb-20"
-          style={{ textShadow: '0px 3px 3px #B7B7A4' }}
-        >
-          &lt;Code Your Own Adventure/&gt;
-        </motion.h1>
-      )}
+      {!starting && <TypingTitle text="Code Your Own Adventure" />}
 
-      {/* Terminal Box */}
+      {/* Terminal Box + About button wrapper for synced fade-in */}
       <motion.div
-        animate={starting ? { scale: 1.2, opacity: 1 } : { scale: 1, opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="z-10 mb-4 relative rounded-xl border border-[#B7B7A4] shadow-lg bg-[#FFE8D6]"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0, duration: 3.1 }}
+        className="z-10 flex flex-col items-center gap-6"
       >
-        <div className="p-1 w-full h-full">
+        <div className="mb-2 p-1 rounded-xl backdrop-blur-md shadow-[0_0_18px_#FFE8D6]">
           <Terminal
             allowStart
             onStart={handleStart}
             initialMessages={[
-              'Welcome to Voices of Tech!',
+              'A blank terminal. A new beginning.',
+              'Are you ready to begin your new adventure?',
+              '꩜ ✦ . ⁺  . ✦ . ⁺  ✦ . ✦  ⁺ . ✦ .  ⁺ . ✦ ꩜',
+              "\n",
               'Type "help" to see available commands.',
-              'Type "start" to begin your journey.',
+              'Type "start" to begin your adventure!',
             ]}
           />
         </div>
-      </motion.div>
 
-      {/* Blinking Enter prompt (optional) */}
-      {/* <div className="text-[#FFE8D6] font-mono animate-pulse mt-4">Press Enter to Start...</div> */}
-
-      {/* About Button */}
-      {!starting && (
         <motion.button
-          onClick={handleAbout}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="border-3 border-[#B7B7A4] mt-6 bg-[#FFE8D6] text-black text-[16px] w-[180px] h-[50px] rounded-[15px] shadow-md hover:bg-[#DDBEA9] transition duration-300 z-10"
+        onClick={handleAbout}
+        className="relative px-10 py-3 text-lg font-jetbrains font-medium z-10 rounded-xl text-[#505050] bg-[#505050] backdrop-blur-md transition duration-300 mt-6
+            hover:scale-105 hover:shadow-[0_0_20px_#FFE8D6] border border-transparent
+            before:content-[''] before:absolute before:inset-0 before:rounded-xl before:p-[2px]
+            before:bg-gradient-to-r before:from-[#80C7F2] before:via-[#E4C1F9] before:to-[#FFB5B5] before:z-[-1]"
         >
-          About
+        About
         </motion.button>
-      )}
+
+      </motion.div>
     </motion.div>
   )
 }

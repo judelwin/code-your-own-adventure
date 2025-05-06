@@ -40,27 +40,35 @@ const Terminal = ({ initialMessages, allowStart = false, onStart }: Props) => {
 
     return (
         <motion.div
-            initial={{ scale: 1 }}
-            animate={{ scale: 1 }}
-            className="bg-[#FFE8D6] p-4 rounded-lg w-full max-w-xl shadow-md border-5 border-[#B7B7A4]"
-        >
-            <div className="h-60 overflow-y-auto text-sm whitespace-pre-wrap mb-4 font-mono text-black text-[16px] font-jetbrains">
-                {messages.map((m, i) => (
-                    <div key={i} dangerouslySetInnerHTML={{ __html: formatMessage(m) }} />
-                ))}
-                <div ref={bottomRef} />
-            </div>
-            <form onSubmit={handleCommand}>
-                <input
-                    type="text"
-                    className="w-full px-2 py-1 bg-[#DDBEA9] border border-[#4A5759] text-sm shadow-inner rounded font-mono text-black text-[16px] font-jetbrains"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    placeholder="Enter your command..."
-                    autoFocus
-                />
-            </form>
-        </motion.div>
+  initial={{ scale: 1 }}
+  animate={{ scale: 1 }}
+  className="w-full p-1 rounded-xl bg-gradient-to-r from-[#80C7F2] via-[#E4C1F9] to-[#FFB5B5] shadow-[0_0_20px_#FFE8D6] transition-all"
+>
+  <div className="rounded-xl bg-[#505050] backdrop-blur-md p-4">
+    {/* Message display */}
+    <div className="h-60 overflow-y-auto text-sm whitespace-pre-wrap mb-4 font-jetbrains text-[#FFE8D6] text-[15px] px-1">
+      {messages.map((m, i) => (
+        <div key={i} dangerouslySetInnerHTML={{ __html: formatMessage(m) }} />
+      ))}
+      <div ref={bottomRef} />
+    </div>
+
+    {/* Input box */}
+    <form onSubmit={handleCommand}>
+      <input
+        type="text"
+        className="w-full px-3 py-2 rounded-md font-jetbrains text-[15px] text-[#2E2E2E]
+        bg-gradient-to-r from-[#80C7F2] via-[#E4C1F9] to-[#FFB5B5]
+        placeholder:text-[#4A5759] shadow-inner border border-[#FFE8D6]/40 focus:outline-none"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Enter your command..."
+        autoFocus
+      />
+    </form>
+  </div>
+</motion.div>
+
     )
 }
 
