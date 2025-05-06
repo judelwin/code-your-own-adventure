@@ -6,7 +6,6 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-[url('/b6.jpg')] bg-cover bg-center bg-no-repeat flex items-center justify-center text-[#505050] font-jetbrains relative">
-      {/* CRT effect */}
       <div className="absolute inset-0 pointer-events-none z-0 crt-overlay" />
 
       <motion.div
