@@ -1,41 +1,63 @@
-import Terminal from '../components/Terminal'
-import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import Terminal from '../components/Terminal';
+import TriangleStats from '../components/TriangleStats';
+import EnergyBar from '../components/EnergyBar';
+import { useStats } from '../context/StatContext';
+import freshmanData from '../data/freshman.json';
 
 const Game = () => {
-    const navigate = useNavigate()
-    const [exiting, setExiting] = useState(false)
+    const { academic, social, career, energy } = useStats();
+    const [currentScenarioIndex, setCurrentScenarioIndex] = useState(0);
+    const [messages, setMessages] = useState<string[]>([]);
+    const scenarios = freshmanData.freshman_fall;
 
-    const handleExit = () => {
-        setExiting(true)
-        setTimeout(() => {
-            navigate('/')
-        }, 1000) // Match the Landing page fade-out duration
+    useEffect(() => {
+        const scenario = scenarios[currentScenarioIndex];
+        if (scenario) {
+            const intro = `${scenario.title}\n${scenario.description}\n\n🟢 ${scenario.decision}`;
+            const options = scenario.options.map((opt, i) => `(${i + 1}) ${opt.input}`).join('\n');
+            setMessages([intro, options]);
+        }
+    }, [currentScenarioIndex]);
+
+    const handleNext = () => {
+        if (currentScenarioIndex < scenarios.length - 1) {
+            setCurrentScenarioIndex(currentScenarioIndex + 1);
+        }
+    };
+
+    const DebugStats = () => {
+        const { academic, social, career, energy } = useStats()
+        return (
+            <div className="text-black text-sm mt-2 font-mono">
+                <p>Academic: {academic}</p>
+                <p>Social: {social}</p>
+                <p>Career: {career}</p>
+                <p>Energy: {energy}</p>
+            </div>
+        )
     }
 
     return (
-        <motion.div
-            initial={{ opacity: 1 }}
-            animate={{ opacity: exiting ? 0 : 1 }}
-            transition={{ duration: 1 }}
-            className="min-h-screen flex items-center justify-center p-4 bg-terminal-base"
-        >
-            <div className="bg-terminal-shell rounded shadow-lg max-w-3xl w-full">
-                <div className="flex items-center space-x-2 p-2 bg-terminal-dark rounded-t">
-                    <div
-                        className="w-3 h-3 bg-red-500 rounded-full cursor-pointer hover:scale-110 transition-transform"
-                        onClick={handleExit}
-                    ></div>
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+        <div className="min-h-screen flex flex-col items-center justify-center bg-terminal-base p-4 space-y-6">
+            <div className="flex flex-col md:flex-row gap-6 w-full max-w-5xl">
+                <div className="flex-1">
+                    <TriangleStats academic={academic} social={social} career={career} />
+                    <EnergyBar energy={energy} />
+                    <DebugStats />
+
                 </div>
-                <div className="p-4">
-                    <Terminal initialMessages={['>> Your journey begins here...']} />
+                <div className="flex-1">
+                    <Terminal
+                        messages={messages}
+                        setMessages={setMessages}
+                        scenario={scenarios[currentScenarioIndex]}
+                        onNext={handleNext}
+                    />
                 </div>
             </div>
-        </motion.div>
-    )
-}
+        </div>
+    );
+};
 
-export default Game
+export default Game;

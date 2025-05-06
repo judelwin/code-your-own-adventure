@@ -1,0 +1,422 @@
+{
+    "freshman_fall": [
+        {
+            "id": "move_in_day",
+            "title": "\ud83d\udce6 Move-In Day \u2013 North Campus Dorms",
+            "description": "You lug your last suitcase up the stairs to your floor in the North Campus dorms, sweat clinging to your back as the late August sun bakes the sidewalk. The hall buzzes with nervous energy. Posters hang crooked. A microwave beeps in someone\u2019s room. You toss your stuff on the bed \u2014 one half of a double \u2014 and look around at your new home.",
+            "decision": "Your roommate peeks in. 'Hey, want to grab dinner at the dining hall?'",
+            "options": [
+                {
+                    "input": "sure, let's go",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 10,
+                        "Career": 0,
+                        "Energy": -5
+                    },
+                    "response": "The dining hall hums with life. You sit across from your roommate, swapping stories over questionable pasta. It feels good to not eat alone."
+                },
+                {
+                    "input": "maybe later",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 0,
+                        "Career": 0,
+                        "Energy": 5
+                    },
+                    "response": "You wave them off politely. The silence in your room stretches as you scroll your phone and crack open a granola bar."
+                },
+                {
+                    "input": "i want to unpack and get organized",
+                    "effects": {
+                        "Academic": 5,
+                        "Social": -5,
+                        "Career": 0,
+                        "Energy": -5
+                    },
+                    "response": "You pull open your suitcase and begin sorting things into drawers. It's satisfying \u2014 if a little lonely."
+                }
+            ]
+        },
+        {
+            "id": "first_cs_class",
+            "title": "\ud83d\udcbb First Day of CMSC131 \u2013 IRB Lecture Hall",
+            "description": "The air in IRB is cooler than outside, but your palms are still clammy. You find a seat halfway up the tiered rows. Nelson launches straight into Java syntax, the whiteboard filling quickly with code snippets: public class, System.out.println, and int num = 0;",
+            "decision": "Class ends and you're not sure how much you absorbed.",
+            "options": [
+                {
+                    "input": "review the lecture slides in your dorm",
+                    "effects": {
+                        "Academic": 5,
+                        "Social": 0,
+                        "Career": 0,
+                        "Energy": -5
+                    },
+                    "response": "Back in your dorm, you pull up the lecture slides and try to connect the dots. It's slowly starting to make sense."
+                },
+                {
+                    "input": "ask someone next to you if they got it",
+                    "effects": {
+                        "Academic": 5,
+                        "Social": 5,
+                        "Career": 0,
+                        "Energy": -5
+                    },
+                    "response": "They grin and say, 'Sort of?' You both laugh and start breaking things down together."
+                },
+                {
+                    "input": "scroll through discord and forget it happened",
+                    "effects": {
+                        "Academic": -5,
+                        "Social": 0,
+                        "Career": 0,
+                        "Energy": 5
+                    },
+                    "response": "You fall into a meme thread and lose track of time. The whiteboard code fades from memory."
+                }
+            ]
+        },
+        {
+            "id": "first_homework",
+            "title": "\ud83d\udcdd First Homework Drops \u2013 Project 1",
+            "description": "That night, ELMS pings. It\u2019s your first CMSC131 project: a calculator using variables, conditionals, and input/output. Nelson\u2019s instructions seem clear... until you open Eclipse and realize you forgot how to set up a class.",
+            "decision": "How do you respond?",
+            "options": [
+                {
+                    "input": "start it early, even if confused",
+                    "effects": {
+                        "Academic": 10,
+                        "Social": 0,
+                        "Career": 0,
+                        "Energy": -10
+                    },
+                    "response": "You grit your teeth and push through. Three tabs open, Java docs in one, StackOverflow in another. It\u2019s messy, but you\u2019re learning."
+                },
+                {
+                    "input": "wait to see if anyone posts about it in the groupme",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 5,
+                        "Career": 0,
+                        "Energy": 0
+                    },
+                    "response": "You scroll through messages and screenshots, hoping someone figures out the setup for you. Eventually, someone does."
+                },
+                {
+                    "input": "ignore it for now, it\u2019s not due yet",
+                    "effects": {
+                        "Academic": -5,
+                        "Social": 0,
+                        "Career": 0,
+                        "Energy": 5
+                    },
+                    "response": "You close the tab and open YouTube. It\u2019ll be fine \u2014 probably."
+                }
+            ]
+        },
+        {
+            "id": "first_look_fair",
+            "title": "\ud83c\udfaa First Look Fair \u2013 McKeldin Mall",
+            "description": "You arrive on McKeldin Mall, where rows of tents stretch into the distance. Clubs chant and toss stickers into the crowd. The heat is brutal, but the excitement is contagious.",
+            "decision": "You pass the CS club tents. Say the name of a club to sign up (Career +5, Social +5, Energy -3). Say 'stop' when you\u2019re done.",
+            "options": [
+                {
+                    "input": "app dev club",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 5,
+                        "Career": 5,
+                        "Energy": -3
+                    },
+                    "response": "A student from App Dev Club lights up as you approach. 'We build apps from scratch \u2014 it\u2019s a great way to get experience!'"
+                },
+                {
+                    "input": "stop",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 0,
+                        "Career": 0,
+                        "Energy": 0
+                    },
+                    "response": "You step back and take a deep breath. Your bag is full of stickers. You\u2019ll check out the Discords later."
+                }
+            ]
+        },
+        {
+            "id": "talking_to_upperclassman",
+            "title": "\ud83d\udcda Talking to an Upperclassman \u2013 Lounge in IRB",
+            "description": "After class, you head to IRB\u2019s lounge and pull out your CMSC131 notes. A junior sits across from you and nods. 'That class definitely kept me busy my first semester. Want any tips?'",
+            "decision": "Ask as many questions as you want. Each question costs Energy -5.",
+            "options": [
+                {
+                    "input": "how did you manage the workload",
+                    "effects": {
+                        "Academic": 5,
+                        "Social": 5,
+                        "Career": 0,
+                        "Energy": -5
+                    },
+                    "response": "They nod. 'I used Notion to organize things and made a habit of doing assignments the day they dropped. It adds up fast.'"
+                },
+                {
+                    "input": "what do you wish you had done first year",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 5,
+                        "Career": 10,
+                        "Energy": -5
+                    },
+                    "response": "'Started applying early,' they say. 'Even if you think you\u2019re not ready, just do it. I missed some great chances freshman year.'"
+                },
+                {
+                    "input": "any clubs you recommend",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 5,
+                        "Career": 5,
+                        "Energy": -5
+                    },
+                    "response": "'App Dev Club really helped me learn practical stuff. Hack4Impact too \u2014 great community and real projects.'"
+                },
+                {
+                    "input": "i'm good, thanks",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 0,
+                        "Career": 0,
+                        "Energy": 0
+                    },
+                    "response": "You smile and nod. They go back to their reading, and you sit with your thoughts for a moment."
+                }
+            ]
+        },
+        {
+            "id": "resume_workshop",
+            "title": "🧾 Resume Workshop – IRB Lobby",
+            "description": "A flyer taped to IRB’s sliding doors catches your eye: \"Resume Workshop Today @ 5 PM — Learn how to stand out.\" You shuffle inside and grab a seat as the presenter begins clicking through slides.",
+            "decision": "Do you stay for the workshop?",
+            "options": [
+                {
+                    "input": "you stay, awkward but useful",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 0,
+                        "Career": 10,
+                        "Energy": -10
+                    },
+                    "response": "You sit through the session, taking scattered notes. It’s a little dry, but seeing how resumes are built gives you ideas for how to frame even small projects."
+                },
+                {
+                    "input": "you skim the slides after",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 0,
+                        "Career": 5,
+                        "Energy": 0
+                    },
+                    "response": "You find the slides online. A few tips stick out, but you know you missed the Q&A part people said was helpful."
+                },
+                {
+                    "input": "you ignore it",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 0,
+                        "Career": -5,
+                        "Energy": 5
+                    },
+                    "response": "You head back to your dorm instead. The day rolls on. That resume will have to wait."
+                }
+            ]
+        },
+        {
+            "id": "internship_browsing",
+            "title": "💼 Internship Browsing – Dorm Late Night",
+            "description": "Lying in bed, you scroll through Handshake and LinkedIn. Programs like Google’s STEP and Meta University pop up — internships specifically for freshmen.",
+            "decision": "Do you take the leap and apply?",
+            "options": [
+                {
+                    "input": "you submit to 3 internships",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 0,
+                        "Career": 10,
+                        "Energy": -10
+                    },
+                    "response": "Your heart pounds as you hit submit. It’s a long shot, but you feel good for trying."
+                },
+                {
+                    "input": "you look up others' experiences on r/csMajors",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 5,
+                        "Career": 5,
+                        "Energy": 0
+                    },
+                    "response": "Scrolling Reddit, you find mixed stories — some got in, some didn’t, some wished they tried sooner. You close the tab a bit more informed."
+                },
+                {
+                    "input": "you decide to wait until next year",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 0,
+                        "Career": -5,
+                        "Energy": 5
+                    },
+                    "response": "You reason that you’ll be more ready later. For now, it’s one less thing to stress about."
+                }
+            ]
+        },
+        {
+            "id": "first_midterm",
+            "title": "🧠 First Midterm – CMSC131",
+            "description": "You sit in IRB, gripping your pencil. The proctor paces slowly. 50 minutes on the clock. One section asks you to write a method by hand. Another wants a dry run of a loop. You haven’t flipped the cover sheet yet.",
+            "decision": "How did you prepare?",
+            "options": [
+                {
+                    "input": "you studied all weekend with classmates",
+                    "effects": {
+                        "Academic": 15,
+                        "Social": 5,
+                        "Career": 0,
+                        "Energy": -15
+                    },
+                    "response": "The questions feel familiar, almost comforting. You breeze through the early problems. Collaboration pays off."
+                },
+                {
+                    "input": "you reviewed notes solo the night before",
+                    "effects": {
+                        "Academic": 5,
+                        "Social": 0,
+                        "Career": 0,
+                        "Energy": -5
+                    },
+                    "response": "You recognize enough to keep your confidence, but a few syntax errors creep in. Could’ve used a second pair of eyes."
+                },
+                {
+                    "input": "you’re winging it",
+                    "effects": {
+                        "Academic": -5,
+                        "Social": 0,
+                        "Career": 0,
+                        "Energy": 0
+                    },
+                    "response": "The clock ticks louder than your thoughts. You scribble what you can. Guessing feels like gambling."
+                }
+            ]
+        },
+        {
+            "id": "first_midterm",
+            "title": "🧠 First Midterm – CMSC131",
+            "description": "You sit in IRB, gripping your pencil. The proctor paces slowly. 50 minutes on the clock. One section asks you to write a method by hand. Another wants a dry run of a loop. You haven’t flipped the cover sheet yet.",
+            "decision": "How did you prepare?",
+            "options": [
+                {
+                    "input": "you studied all weekend with classmates",
+                    "effects": {
+                        "Academic": 15,
+                        "Social": 5,
+                        "Career": 0,
+                        "Energy": -15
+                    },
+                    "response": "The questions feel familiar, almost comforting. You breeze through the early problems. Collaboration pays off."
+                },
+                {
+                    "input": "you reviewed notes solo the night before",
+                    "effects": {
+                        "Academic": 5,
+                        "Social": 0,
+                        "Career": 0,
+                        "Energy": -5
+                    },
+                    "response": "You recognize enough to keep your confidence, but a few syntax errors creep in. Could’ve used a second pair of eyes."
+                },
+                {
+                    "input": "you’re winging it",
+                    "effects": {
+                        "Academic": -5,
+                        "Social": 0,
+                        "Career": 0,
+                        "Energy": 0
+                    },
+                    "response": "The clock ticks louder than your thoughts. You scribble what you can. Guessing feels like gambling."
+                }
+            ]
+        },
+        {
+            "id": "internship_interview",
+            "title": "💬 Internship Interview – Virtual Zoom Call",
+            "description": "One of the internships you applied to responds — they want to schedule a short behavioral interview.",
+            "decision": "Do you go through with it?",
+            "options": [
+                {
+                    "input": "accept and prep thoughtful questions to ask them",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 0,
+                        "Career": 10,
+                        "Energy": -10
+                    },
+                    "response": "You log in early, notes at the ready. The interviewer nods as you ask about the company’s mentorship programs. You log off feeling proud."
+                },
+                {
+                    "input": "accept but don’t prepare",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 0,
+                        "Career": 0,
+                        "Energy": 0
+                    },
+                    "response": "You fumble a bit when asked about your strengths. It ends quickly. Not terrible, but not memorable either."
+                },
+                {
+                    "input": "politely decline; you’re not ready",
+                    "effects": {
+                        "Academic": 0,
+                        "Social": 0,
+                        "Career": -5,
+                        "Energy": 5
+                    },
+                    "response": "You send a short email thanking them for the offer. It stings a little, but you breathe easier."
+                }
+            ]
+        },
+        {
+            "id": "finals_week",
+            "title": "📖 Finals Week – McKeldin Library",
+            "description": "McKeldin is packed. Students murmur to themselves over scattered notes. The whir of laptops and the faint fizz of opened Celsiuses fill the room. You're surrounded by whiteboards scribbled with trees and recursion.",
+            "decision": "What’s your game plan?",
+            "options": [
+                {
+                    "input": "join a study group in one of the glass rooms",
+                    "effects": {
+                        "Academic": 10,
+                        "Social": 5,
+                        "Career": 0,
+                        "Energy": -10
+                    },
+                    "response": "A group waves you in. Diagrams go on the board. Someone offers to explain depth-first search again. It clicks."
+                },
+                {
+                    "input": "study solo with lo-fi in your ears",
+                    "effects": {
+                        "Academic": 10,
+                        "Social": 0,
+                        "Career": 0,
+                        "Energy": -10
+                    },
+                    "response": "You bunker down at a corner desk. The beats keep you grounded as you grind through past exams."
+                },
+                {
+                    "input": "give up for the night and go home",
+                    "effects": {
+                        "Academic": -5,
+                        "Social": 0,
+                        "Career": 0,
+                        "Energy": 10
+                    },
+                    "response": "You pack up, promising yourself you’ll hit it harder tomorrow. You need a reset."
+                }
+            ]
+        }
+    ]
+}

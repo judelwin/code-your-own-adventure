@@ -1,7 +1,7 @@
-import Terminal from '../components/Terminal'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import WelcomeTerminal from '../components/WelcomeTerminal'
 
 const TypingTitle = ({ text }: { text: string }) => {
   const [index, setIndex] = useState(0)
@@ -136,7 +136,7 @@ const Landing = () => {
         className="z-10 flex flex-col items-center gap-6"
       >
         <div className="mb-2 p-1 rounded-xl backdrop-blur-md shadow-[0_0_18px_#FFE8D6]">
-          <Terminal
+          <WelcomeTerminal
             allowStart
             onStart={handleStart}
             initialMessages={[
@@ -151,13 +151,13 @@ const Landing = () => {
         </div>
 
         <motion.button
-        onClick={handleAbout}
-        className="relative px-10 py-3 text-lg font-jetbrains font-medium z-10 rounded-xl text-[#505050] bg-[#505050] backdrop-blur-md transition duration-300 mt-6
+          onClick={handleAbout}
+          className="relative px-10 py-3 text-lg font-jetbrains font-medium z-10 rounded-xl text-[#505050] bg-[#505050] backdrop-blur-md transition duration-300 mt-6
             hover:scale-105 hover:shadow-[0_0_20px_#FFE8D6] border border-transparent
             before:content-[''] before:absolute before:inset-0 before:rounded-xl before:p-[2px]
             before:bg-gradient-to-r before:from-[#80C7F2] before:via-[#E4C1F9] before:to-[#FFB5B5] before:z-[-1]"
         >
-        About
+          About
         </motion.button>
 
       </motion.div>
