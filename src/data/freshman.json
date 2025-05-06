@@ -2,7 +2,7 @@
     "freshman_fall": [
         {
             "id": "move_in_day",
-            "title": "\ud83d\udce6 Move-In Day \u2013 North Campus Dorms",
+            "title": "Move-In Day \u2013 North Campus Dorms",
             "description": "You lug your last suitcase up the stairs to your floor in the North Campus dorms, sweat clinging to your back as the late August sun bakes the sidewalk. The hall buzzes with nervous energy. Posters hang crooked. A microwave beeps in someone\u2019s room. You toss your stuff on the bed \u2014 one half of a double \u2014 and look around at your new home.",
             "decision": "Your roommate peeks in. 'Hey, want to grab dinner at the dining hall?'",
             "options": [
@@ -40,7 +40,7 @@
         },
         {
             "id": "first_cs_class",
-            "title": "\ud83d\udcbb First Day of CMSC131 \u2013 IRB Lecture Hall",
+            "title": "First Day of CMSC131 \u2013 IRB Lecture Hall",
             "description": "The air in IRB is cooler than outside, but your palms are still clammy. You find a seat halfway up the tiered rows. Nelson launches straight into Java syntax, the whiteboard filling quickly with code snippets: public class, System.out.println, and int num = 0;",
             "decision": "Class ends and you're not sure how much you absorbed.",
             "options": [
@@ -78,7 +78,7 @@
         },
         {
             "id": "first_homework",
-            "title": "\ud83d\udcdd First Homework Drops \u2013 Project 1",
+            "title": "First Homework Drops \u2013 Project 1",
             "description": "That night, ELMS pings. It\u2019s your first CMSC131 project: a calculator using variables, conditionals, and input/output. Nelson\u2019s instructions seem clear... until you open Eclipse and realize you forgot how to set up a class.",
             "decision": "How do you respond?",
             "options": [
@@ -116,7 +116,7 @@
         },
         {
             "id": "first_look_fair",
-            "title": "\ud83c\udfaa First Look Fair \u2013 McKeldin Mall",
+            "title": "First Look Fair \u2013 McKeldin Mall",
             "description": "You arrive on McKeldin Mall, where rows of tents stretch into the distance. Clubs chant and toss stickers into the crowd. The heat is brutal, but the excitement is contagious.",
             "decision": "You pass the CS club tents. Say the name of a club to sign up (Career +5, Social +5, Energy -3). Say 'stop' when you\u2019re done.",
             "options": [
@@ -144,7 +144,7 @@
         },
         {
             "id": "talking_to_upperclassman",
-            "title": "\ud83d\udcda Talking to an Upperclassman \u2013 Lounge in IRB",
+            "title": "Talking to an Upperclassman \u2013 Lounge in IRB",
             "description": "After class, you head to IRB\u2019s lounge and pull out your CMSC131 notes. A junior sits across from you and nods. 'That class definitely kept me busy my first semester. Want any tips?'",
             "decision": "Ask as many questions as you want. Each question costs Energy -5.",
             "options": [
@@ -192,7 +192,7 @@
         },
         {
             "id": "resume_workshop",
-            "title": "🧾 Resume Workshop – IRB Lobby",
+            "title": "Resume Workshop – IRB Lobby",
             "description": "A flyer taped to IRB’s sliding doors catches your eye: \"Resume Workshop Today @ 5 PM — Learn how to stand out.\" You shuffle inside and grab a seat as the presenter begins clicking through slides.",
             "decision": "Do you stay for the workshop?",
             "options": [
@@ -230,7 +230,7 @@
         },
         {
             "id": "internship_browsing",
-            "title": "💼 Internship Browsing – Dorm Late Night",
+            "title": "Internship Browsing – Dorm Late Night",
             "description": "Lying in bed, you scroll through Handshake and LinkedIn. Programs like Google’s STEP and Meta University pop up — internships specifically for freshmen.",
             "decision": "Do you take the leap and apply?",
             "options": [
@@ -268,7 +268,7 @@
         },
         {
             "id": "first_midterm",
-            "title": "🧠 First Midterm – CMSC131",
+            "title": "First Midterm – CMSC131",
             "description": "You sit in IRB, gripping your pencil. The proctor paces slowly. 50 minutes on the clock. One section asks you to write a method by hand. Another wants a dry run of a loop. You haven’t flipped the cover sheet yet.",
             "decision": "How did you prepare?",
             "options": [
@@ -306,7 +306,7 @@
         },
         {
             "id": "first_midterm",
-            "title": "🧠 First Midterm – CMSC131",
+            "title": "First Midterm – CMSC131",
             "description": "You sit in IRB, gripping your pencil. The proctor paces slowly. 50 minutes on the clock. One section asks you to write a method by hand. Another wants a dry run of a loop. You haven’t flipped the cover sheet yet.",
             "decision": "How did you prepare?",
             "options": [
@@ -344,7 +344,7 @@
         },
         {
             "id": "internship_interview",
-            "title": "💬 Internship Interview – Virtual Zoom Call",
+            "title": "Internship Interview – Virtual Zoom Call",
             "description": "One of the internships you applied to responds — they want to schedule a short behavioral interview.",
             "decision": "Do you go through with it?",
             "options": [
@@ -382,7 +382,7 @@
         },
         {
             "id": "finals_week",
-            "title": "📖 Finals Week – McKeldin Library",
+            "title": "Finals Week – McKeldin Library",
             "description": "McKeldin is packed. Students murmur to themselves over scattered notes. The whir of laptops and the faint fizz of opened Celsiuses fill the room. You're surrounded by whiteboards scribbled with trees and recursion.",
             "decision": "What’s your game plan?",
             "options": [

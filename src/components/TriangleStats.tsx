@@ -30,23 +30,48 @@ const TriangleStats = ({ academic, social, career }: Props) => {
   };
 
   return (
-    <svg width="200" height="200" className="mb-4">
-      <polygon
-        points="100,0 0,173.2 200,173.2"
-        fill="none"
-        stroke="#ccc"
-        strokeWidth="2"
-      />
-      <polygon
-        points={points()}
-        fill="#FFE8D6"
-        stroke="#CB997E"
-        strokeWidth="2"
-      />
-      <text x="95" y="10" fontSize="10">Academic</text>
-      <text x="5" y="180" fontSize="10">Social</text>
-      <text x="160" y="180" fontSize="10">Career</text>
-    </svg>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+      {/* Academic label centered */}
+      <span style={{
+        fontWeight: 'bold',
+        fontSize: '12px',
+        color: 'white',
+        position: 'relative',
+        marginBottom: '3px',
+        left: '-7px',
+      }}>
+        Academic
+      </span>
+
+      {/* SVG for the triangle */}
+      <svg width="220" height="220" className="mb-4">
+        {/* Static triangle background */}
+        <polygon
+          points="100,0 0,173.2 200,173.2"
+          fill="#505050"
+          stroke="#ccc"
+          strokeWidth="2"
+        />
+        {/* Dynamic part with gradient */}
+        <polygon
+          points={points()}
+          fill="url(#gradient)"
+          stroke="#CB997E"
+          strokeWidth="2"
+        />
+        <text x="5" y="190" fontWeight="bold" fill="white" fontSize="12">Social</text>
+        <text x="160" y="190" fontWeight="bold" fill="white" fontSize="12">Career</text>
+
+        {/* Gradient Definition */}
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style={{ stopColor: "#80C7F2", stopOpacity: 1 }} />
+            <stop offset="50%" style={{ stopColor: "#E4C1F9", stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: "#FFB5B5", stopOpacity: 1 }} />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
   );
 };
 

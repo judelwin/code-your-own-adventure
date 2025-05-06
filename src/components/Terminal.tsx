@@ -42,8 +42,10 @@ const Terminal = ({
 }: Props) => {
   const [input, setInput] = useState('')
   const bottomRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null) // Ref for focusing the input field
   const location = useLocation()
   const [hasShownModal, setHasShownModal] = useState(false)
+  const [waitingForKeyPress, setWaitingForKeyPress] = useState(false)
   const { updateStats } = useStats()
 
   useEffect(() => {
@@ -73,11 +75,9 @@ const Terminal = ({
 
       if (match) {
         updateStats(match.effects)
-        setMessages((prev) => [...prev, `> ${trimmed}`, match.response])
-        setTimeout(() => {
-          setInput('')
-          if (onNext) onNext()
-        }, 500)
+        setMessages((prev) => [...prev, `> ${trimmed}`, match.response, 'Press Enter to continue...'])
+        setWaitingForKeyPress(true) // Set waiting for key press after response is shown
+        setInput('') // Clear input immediately
         return
       } else {
         setMessages((prev) => [...prev, `> ${trimmed}`, `Unknown command: "${trimmed}"`])
@@ -99,6 +99,32 @@ const Terminal = ({
     setInput('')
   }
 
+  const handleKeyPress = (e: KeyboardEvent) => {
+    if (waitingForKeyPress && e.key === 'Enter') {
+      setWaitingForKeyPress(false)
+      setMessages((prev) => [...prev, 'Moving to the next scene...'])
+      setTimeout(() => {
+        setInput('')
+        if (onNext) onNext()
+        inputRef.current?.focus() // Focus the input after the transition
+      }, 500)
+    }
+  }
+
+  useEffect(() => {
+    // Listen for Enter key press to move to the next scene
+    if (waitingForKeyPress) {
+      const handle = (e: KeyboardEvent) => {
+        handleKeyPress(e)
+      }
+
+      window.addEventListener('keydown', handle)
+      return () => {
+        window.removeEventListener('keydown', handle)
+      }
+    }
+  }, [waitingForKeyPress])
+
   const formatMessage = (msg: string) => {
     return msg.replace(/\b(help|start)\b/gi, '<strong>$1</strong>')
   }
@@ -110,7 +136,7 @@ const Terminal = ({
       className="w-full p-1 rounded-xl bg-gradient-to-r from-[#80C7F2] via-[#E4C1F9] to-[#FFB5B5] shadow-[0_0_20px_#FFE8D6] transition-all"
     >
       <div className="rounded-xl bg-[#505050] backdrop-blur-md p-4">
-        <div className="h-60 overflow-y-auto text-sm whitespace-pre-wrap mb-4 font-jetbrains text-[#FFE8D6] text-[15px] px-1">
+        <div className="h-60 overflow-y-auto text-sm whitespace-pre-wrap mb-4 mt-2 font-jetbrains text-[#FFE8D6] text-[15px] px-1">
           {messages.map((m, i) => (
             <div key={i} dangerouslySetInnerHTML={{ __html: formatMessage(m) }} />
           ))}
@@ -126,6 +152,8 @@ const Terminal = ({
             onChange={(e) => setInput(e.target.value)}
             placeholder="Enter your command..."
             autoFocus
+            ref={inputRef} // Set the ref here
+            disabled={waitingForKeyPress} // Disable input while waiting for key press
           />
         </form>
       </div>
