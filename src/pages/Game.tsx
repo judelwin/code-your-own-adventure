@@ -21,7 +21,7 @@ const Game = () => {
     useEffect(() => {
         const scenario = scenarios[currentScenarioIndex]
         if (scenario) {
-            const intro = `${scenario.title}\n${scenario.description}\n\n🟢 ${scenario.decision}`
+            const intro = `${scenario.title}\n${scenario.description}\n\n${scenario.decision}`
             const options = scenario.options
                 .map((opt, i) => `(${i + 1}) ${opt.input}`)
                 .join('\n')

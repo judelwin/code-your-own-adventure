@@ -35,7 +35,7 @@ const TriangleStats = ({ academic, social, career }: Props) => {
       <span style={{
         fontWeight: 'bold',
         fontSize: '12px',
-        color: 'white',
+        color: '#FFE8D6',
         position: 'relative',
         marginBottom: '3px',
         left: '-7px',
@@ -49,7 +49,7 @@ const TriangleStats = ({ academic, social, career }: Props) => {
         <polygon
           points="100,0 0,173.2 200,173.2"
           fill="#505050"
-          stroke="#ccc"
+          stroke="#FFE8D6"
           strokeWidth="2"
         />
         {/* Dynamic part with gradient */}
@@ -59,8 +59,8 @@ const TriangleStats = ({ academic, social, career }: Props) => {
           stroke="#CB997E"
           strokeWidth="2"
         />
-        <text x="5" y="190" fontWeight="bold" fill="white" fontSize="12">Social</text>
-        <text x="160" y="190" fontWeight="bold" fill="white" fontSize="12">Career</text>
+        <text x="5" y="190" fontWeight="bold" fill="#FFE8D6" fontSize="12">Social</text>
+        <text x="160" y="190" fontWeight="bold" fill="#FFE8D6" fontSize="12">Career</text>
 
         {/* Gradient Definition */}
         <defs>
