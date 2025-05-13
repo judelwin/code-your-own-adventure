@@ -6,7 +6,7 @@ const HowToPlayModal = ({ onClose }: { onClose: () => void }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }} // smoother fade
+      transition={{ duration: 1, ease: 'easeOut' }} // smoother fade
       className="fixed top-0 left-0 w-full h-full z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center"
       >
       <motion.div

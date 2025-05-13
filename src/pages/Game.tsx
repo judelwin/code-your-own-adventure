@@ -7,33 +7,53 @@ import HowToPlayModal from '../components/HowToPlayModal'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import freshmanData from '../data/freshman.json'
+import { useLocation } from 'react-router-dom'
 
 const Game = () => {
     const navigate = useNavigate()
     const { academic, social, career, energy } = useStats()
     const [currentScenarioIndex, setCurrentScenarioIndex] = useState(0)
     const [messages, setMessages] = useState<string[]>([])
-    const [showHowToPlay, setShowHowToPlay] = useState(false)
     const [exiting, setExiting] = useState(false)
-
+    const location = useLocation()  
+    const showModalOnLoad = location.state?.showModal
     const scenarios = freshmanData.freshman_fall
+    const [showHowToPlay, setShowHowToPlay] = useState<boolean>(showModalOnLoad ?? false)
 
     useEffect(() => {
         const scenario = scenarios[currentScenarioIndex]
         if (scenario) {
-            const intro = `${scenario.title}\n${scenario.description}\n\n${scenario.decision}`
-            const options = scenario.options
-                .map((opt, i) => `(${i + 1}) ${opt.input}`)
-                .join('\n')
-            setMessages([intro, options])
+          const intro = `<strong>${scenario.title}</strong><br />${scenario.description}<br /><br /><strong>${scenario.decision}</strong>`
+          const options = scenario.options
+            .map((opt, i) => `(${i + 1}) ${opt.input}`)
+            .join('<br />')
+          setMessages([intro, options])
         }
-    }, [currentScenarioIndex])
+      }, [currentScenarioIndex])      
 
-    const handleNext = () => {
-        if (currentScenarioIndex < scenarios.length - 1) {
+      const handleNext = () => {
+        const isLastScenario = currentScenarioIndex >= scenarios.length - 1
+        const isOutOfEnergy = energy <= 0
+      
+        if (isLastScenario || isOutOfEnergy) {
+            setExiting(true)
+            setTimeout(() => {
+              navigate('/ending', {
+                state: {
+                  academic,
+                  social,
+                  career,
+                  energy,
+                }
+              })
+            }, 1000)
+          }
+        
+          if (currentScenarioIndex < scenarios.length - 1) {
             setCurrentScenarioIndex((prev) => prev + 1)
         }
-    }
+        
+      }      
 
     const handleExit = () => {
         setExiting(true)
@@ -64,14 +84,14 @@ const Game = () => {
             <div className="flex-1 relative flex flex-col items-center">
                 <div className="relative w-1/2 max-w-4xl">
                     {/* Window buttons inside the terminal */}
-                    <div className="absolute top-3 left-3 flex space-x-2 z-50">
+                    {/* <div className="absolute top-4 left-4 flex space-x-2 z-50">
                         <div
                             className="w-2.5 h-2.5 bg-red-500 rounded-full cursor-pointer hover:scale-110 transition-transform"
                             onClick={handleExit}
                         ></div>
                         <div className="w-2.5 h-2.5 bg-yellow-400 rounded-full"></div>
                         <div className="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
-                    </div>
+                    </div> */}
 
                     {/* Terminal Component */}
                     <Terminal

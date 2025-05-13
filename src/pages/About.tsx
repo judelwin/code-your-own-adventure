@@ -33,7 +33,7 @@ const About = () => {
         </p>
 
         <p className="mb-4 leading-relaxed">
-          <em>Code Your Own Adventure</em> is built by two college students, <a href="https://www.linkedin.com/in/shiqicathywu/l" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#FFB5B5]"><strong>Cathy</strong></a> and <a href="https://www.linkedin.com/in/judelwin/" target="_blank" rel="noopener noreferrer" className="underline hover:text-[#FFB5B5]"><strong>Jude</strong></a>. We've lived it, coded it, and now we want to share it with <em>you</em>.
+          <em><strong>Code Your Own Adventure</strong></em> is built by two college students, <a href="https://www.linkedin.com/in/shiqicathywu/l" target="_blank" rel="noopener noreferrer" className="underline hover:italic"><strong>Cathy</strong></a> and <a href="https://www.linkedin.com/in/judelwin/" target="_blank" rel="noopener noreferrer" className="underline hover:italic"><strong>Jude</strong></a>. We've lived it, coded it, and now we want to share it with <em>you</em>.
         </p>
 
         <motion.button

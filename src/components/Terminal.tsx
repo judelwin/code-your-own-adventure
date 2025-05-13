@@ -42,7 +42,7 @@ const Terminal = ({
 }: Props) => {
   const [input, setInput] = useState('')
   const bottomRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null) // Ref for focusing the input field
+  const inputRef = useRef<HTMLInputElement>(null)
   const location = useLocation()
   const [hasShownModal, setHasShownModal] = useState(false)
   const [waitingForKeyPress, setWaitingForKeyPress] = useState(false)
@@ -66,7 +66,6 @@ const Terminal = ({
     const trimmed = input.trim().toLowerCase()
     if (!trimmed) return
 
-    // Scenario-based input (e.g., options 1, 2, etc.)
     if (scenario) {
       const match = scenario.options.find(
         (opt, i) =>
@@ -75,26 +74,25 @@ const Terminal = ({
 
       if (match) {
         updateStats(match.effects)
-        setMessages((prev) => [...prev, `> ${trimmed}`, match.response, 'Press Enter to continue...'])
-        setWaitingForKeyPress(true) // Set waiting for key press after response is shown
-        setInput('') // Clear input immediately
+        setMessages(prev => [...prev, `> ${trimmed}`, match.response, '<em>Press Enter to continue...</em>'])
+        setWaitingForKeyPress(true)
+        setInput('')
         return
       } else {
-        setMessages((prev) => [...prev, `> ${trimmed}`, `Unknown command: "${trimmed}"`])
+        setMessages(prev => [...prev, `> ${trimmed}`, `Unknown command: "${trimmed}"`])
         setInput('')
         return
       }
     }
 
-    // Default behavior (Landing page)
-    setMessages((prev) => [...prev, `> ${trimmed}`])
+    setMessages(prev => [...prev, `> ${trimmed}`])
     if (trimmed === 'help') {
-      setMessages((prev) => [...prev, 'Available commands: "help", "start"'])
+      setMessages(prev => [...prev, 'Available commands: "help", "start"'])
     } else if (trimmed === 'start' && allowStart) {
       if (onStart) onStart()
       if (setShowHowToPlay) setShowHowToPlay(true)
     } else {
-      setMessages((prev) => [...prev, `Unknown command: "${trimmed}"`])
+      setMessages(prev => [...prev, `Unknown command: "${trimmed}"`])
     }
     setInput('')
   }
@@ -102,22 +100,20 @@ const Terminal = ({
   const handleKeyPress = (e: KeyboardEvent) => {
     if (waitingForKeyPress && e.key === 'Enter') {
       setWaitingForKeyPress(false)
-      setMessages((prev) => [...prev, 'Moving to the next scene...'])
+      setMessages(prev => [...prev, 'Moving to the next scene...'])
       setTimeout(() => {
         setInput('')
         if (onNext) onNext()
-        inputRef.current?.focus() // Focus the input after the transition
+        inputRef.current?.focus()
       }, 500)
     }
   }
 
   useEffect(() => {
-    // Listen for Enter key press to move to the next scene
     if (waitingForKeyPress) {
       const handle = (e: KeyboardEvent) => {
         handleKeyPress(e)
       }
-
       window.addEventListener('keydown', handle)
       return () => {
         window.removeEventListener('keydown', handle)
@@ -133,27 +129,40 @@ const Terminal = ({
     <motion.div
       initial={{ scale: 1 }}
       animate={{ scale: 1 }}
-      className="w-full p-1 rounded-xl bg-gradient-to-r from-[#80C7F2] via-[#E4C1F9] to-[#FFB5B5] shadow-[0_0_20px_#FFE8D6] transition-all"
+      className="w-full max-w-4xl mx-auto p-2 rounded-xl bg-gradient-to-r from-[#80C7F2] via-[#E4C1F9] to-[#FFB5B5] shadow-[0_0_20px_#FFE8D6] transition-all"
     >
-      <div className="rounded-xl bg-[#505050] backdrop-blur-md p-4">
-        <div className="h-60 overflow-y-auto text-sm whitespace-pre-wrap mb-4 mt-2 font-jetbrains text-[#FFE8D6] text-[15px] px-1">
+      <div className="rounded-xl bg-[#505050] backdrop-blur-md p-6">
+        {/* Mac-style window buttons */}
+      <div className="absolute top-3 left-3 flex space-x-2">
+        <div
+          className="w-2.5 h-2.5 bg-red-500 rounded-full cursor-pointer hover:scale-110 transition-transform"
+          onClick={() => window.location.href = '/'} // or pass `onExit` as a prop
+        ></div>
+        <div className="w-2.5 h-2.5 bg-yellow-400 rounded-full"></div>
+        <div className="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
+      </div>
+        
+        {/* Terminal Output */}
+        <div className="h-[400px] overflow-y-auto whitespace-pre-wrap mb-4 mt-2 font-jetbrains text-[#FFE8D6] text-[17px] px-2">
           {messages.map((m, i) => (
             <div key={i} dangerouslySetInnerHTML={{ __html: formatMessage(m) }} />
           ))}
           <div ref={bottomRef} />
         </div>
+
+        {/* Input Box */}
         <form onSubmit={handleCommand}>
           <input
             type="text"
-            className="w-full px-3 py-2 rounded-md font-jetbrains text-[15px] text-[#2E2E2E]
+            className="w-full px-4 py-3 rounded-lg font-jetbrains text-[17px] text-[#2E2E2E]
               bg-gradient-to-r from-[#80C7F2] via-[#E4C1F9] to-[#FFB5B5]
               placeholder:text-[#4A5759] shadow-inner border border-[#FFE8D6]/40 focus:outline-none"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Enter your command..."
             autoFocus
-            ref={inputRef} // Set the ref here
-            disabled={waitingForKeyPress} // Disable input while waiting for key press
+            ref={inputRef}
+            disabled={waitingForKeyPress}
           />
         </form>
       </div>

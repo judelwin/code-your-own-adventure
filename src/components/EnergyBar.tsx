@@ -9,7 +9,7 @@ const EnergyBar = ({ energy }: Props) => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="w-6 h-[180px] bg-[#505050] rounded-full flex items-end overflow-hidden border-#FFE8D6 shadow-m">
+      <div className="w-10 h-[240px] bg-[#505050] rounded-full flex items-end overflow-hidden border-[#FFE8D6] shadow-[0_0_20px_#FFE8D6]">
         <div
           className="w-full transition-all duration-500"
           style={{
@@ -22,10 +22,10 @@ const EnergyBar = ({ energy }: Props) => {
       {/* Label Below EnergyBar */}
       <span
         style={{
-          fontSize: '12px',
+          fontSize: '16px',
           fontWeight: 'bold',
-          marginTop: '3px', // Adjust spacing between the bar and label
-          color: '#FFE8D6'    // You can customize the color if needed
+          marginTop: '6px',
+          color: '#FFE8D6'
         }}
       >
         Energy

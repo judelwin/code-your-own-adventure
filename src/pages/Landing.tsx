@@ -108,9 +108,9 @@ const Landing = () => {
   const handleStart = () => {
     setStarting(true)
     setTimeout(() => {
-      navigate('/game')
+      navigate('/game', { state: { showModal: true } }) // pass state!
     }, 800)
-  }
+  }  
 
   return (
     <motion.div
