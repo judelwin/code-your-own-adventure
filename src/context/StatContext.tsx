@@ -6,6 +6,7 @@ type StatContextType = {
   career: number;
   energy: number;
   updateStats: (changes: { Academic: number; Social: number; Career: number; Energy: number }) => void;
+  resetStats: () => void; 
 };
 
 const defaultValues = {
@@ -13,7 +14,8 @@ const defaultValues = {
   social: 50,
   career: 50,
   energy: 100,
-  updateStats: () => {}
+  updateStats: () => {},
+  resetStats: () => {} 
 };
 
 const StatContext = createContext<StatContextType>(defaultValues);
@@ -31,11 +33,18 @@ export const StatProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setEnergy(prev => Math.max(0, Math.min(100, prev + Energy)));
   };
 
+  const resetStats = () => {
+    setAcademic(50);
+    setSocial(50);
+    setCareer(50);
+    setEnergy(100);
+  };
+  
   return (
-    <StatContext.Provider value={{ academic, social, career, energy, updateStats }}>
+    <StatContext.Provider value={{ academic, social, career, energy, updateStats, resetStats }}>
       {children}
     </StatContext.Provider>
-  );
+  );  
 };
 
 export const useStats = () => useContext(StatContext);

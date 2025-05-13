@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useStats } from '../context/StatContext'
 
 const floatingWords = [
   { text: 'print("goodbye world")', top: '80%', left: '15%' },
@@ -41,6 +42,7 @@ const Ending = () => {
   const navigate = useNavigate()
   const { state } = useLocation()
   const { academic, social, career, energy } = state || {}
+  const { resetStats } = useStats();
 
   let heading = 'You Made It!'
   if (energy <= 0) {
@@ -149,7 +151,10 @@ const Ending = () => {
       {/* Play Again Button */}
       <motion.button
         whileTap={{ scale: 0.95 }}
-        onClick={() => navigate('/')}
+        onClick={() => {
+          resetStats();
+          navigate('/');
+        }}
         className="relative mt-10 px-10 py-3 text-lg font-jetbrains font-medium z-10 rounded-xl text-[#505050] bg-[#505050] backdrop-blur-md transition duration-300
           hover:scale-105 hover:shadow-[0_0_20px_#FFE8D6] border border-transparent
           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E4C1F9]
