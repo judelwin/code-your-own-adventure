@@ -131,8 +131,8 @@ const Ending = () => {
           >
             Board of Advice
           </h2>
-          <ul className="list-disc list-inside text-left text-[#FFE8D6] space-y-2 font-jetbrains text-[15px]">
-            {adviceBoard.map((tip, index) => (
+          <ul className="list-disc text-left text-[#FFE8D6] space-y-2 font-jetbrains text-[15px] pl-4">
+          {adviceBoard.map((tip, index) => (
               <motion.li
                 key={index}
                 initial={{ opacity: 0, y: 10 }}
