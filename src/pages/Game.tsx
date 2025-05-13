@@ -20,6 +20,12 @@ const Game = () => {
     const scenarios = freshmanData.freshman_fall
     const [showHowToPlay, setShowHowToPlay] = useState<boolean>(showModalOnLoad ?? false)
 
+    const getBackgroundImage = () => {
+      if (energy <= 30) return "/3425511.jpg"  // low energy
+      if (energy <= 60) return "/b1.jpg"  // medium
+      return "/b2.jpg"                    // high
+    }    
+
     useEffect(() => {
         const scenario = scenarios[currentScenarioIndex]
         if (scenario) {
@@ -67,8 +73,9 @@ const Game = () => {
             initial={{ opacity: 1 }}
             animate={{ opacity: exiting ? 0 : 1 }}
             transition={{ duration: 1 }}
-            className="min-h-screen flex items-center justify-center bg-terminal-base bg-[url('/b3.jpg')] bg-cover bg-center bg-no-repeat p-4 relative space-y-6"
-        >
+            style={{ backgroundImage: `url(${getBackgroundImage()})` }}
+            className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat p-4 relative space-y-6 transition-all duration-700"
+                    >
             {showHowToPlay && <HowToPlayModal onClose={() => setShowHowToPlay(false)} />}
 
             {/* Stats Section (Positioned in the top left using absolute positioning) */}

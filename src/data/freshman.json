@@ -20,7 +20,7 @@
                     "input": "Hm, maybe later",
                     "effects": {
                         "Academic": 0,
-                        "Social": 0,
+                        "Social": -5,
                         "Career": 0,
                         "Energy": 5
                     },
@@ -105,10 +105,10 @@
                 {
                     "input": "Ignore it for now, it\u2019s not due yet",
                     "effects": {
-                        "Academic": -5,
+                        "Academic": -10,
                         "Social": 0,
                         "Career": 0,
-                        "Energy": 5
+                        "Energy": 0
                     },
                     "response": "You close the tab and open YouTube. It\u2019ll be fine \u2014 probably."
                 }
@@ -237,7 +237,7 @@
                     "effects": {
                         "Academic": 0,
                         "Social": 5,
-                        "Career": 10,
+                        "Career": 5,
                         "Energy": -5
                     },
                     "response": "<em>'I wish I had started applying to internships early,'</em> they say. <em>'Even if you think you\u2019re not ready, just do it. Always say yes to things; I feel like missed some great chances freshman year.'</em>"
@@ -275,8 +275,8 @@
                     "effects": {
                         "Academic": 0,
                         "Social": 0,
-                        "Career": 10,
-                        "Energy": -10
+                        "Career": 5,
+                        "Energy": -5
                     },
                     "response": "You sit through the session, taking scattered notes. It’s a little dry, but seeing how resumes are built gives you ideas for how to frame even small projects."
                 },
@@ -285,7 +285,7 @@
                     "effects": {
                         "Academic": 0,
                         "Social": 0,
-                        "Career": 5,
+                        "Career": 1,
                         "Energy": -5
                     },
                     "response": "You find the slides online. A few tips stick out, but you know you missed the Q&A part people said was helpful."
@@ -296,7 +296,7 @@
                         "Academic": 0,
                         "Social": 0,
                         "Career": -5,
-                        "Energy": 5
+                        "Energy": 0
                     },
                     "response": "You head back to your dorm instead. The day rolls on. That resume will have to wait."
                 }
@@ -399,7 +399,7 @@
                     "effects": {
                         "Academic": 0,
                         "Social": 0,
-                        "Career": 0,
+                        "Career": -5,
                         "Energy": -5
                     },
                     "response": "You fumble a bit when asked about your strengths. It ends quickly. Not terrible, but not memorable either."
@@ -409,7 +409,7 @@
                     "effects": {
                         "Academic": 0,
                         "Social": 0,
-                        "Career": -5,
+                        "Career": -10,
                         "Energy": 5
                     },
                     "response": "You send a short email thanking them for the offer. It stings a little, but you relax easier."
