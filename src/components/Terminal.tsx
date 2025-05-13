@@ -19,6 +19,8 @@ type Scenario = {
   description: string
   decision: string
   options: Option[]
+  multiSelect?: boolean
+  stopCommand?: string
 }
 
 type Props = {
@@ -46,6 +48,7 @@ const Terminal = ({
   const location = useLocation()
   const [hasShownModal, setHasShownModal] = useState(false)
   const [waitingForKeyPress, setWaitingForKeyPress] = useState(false)
+  const [awaitingRepeat, setAwaitingRepeat] = useState(false)
   const { updateStats } = useStats()
 
   useEffect(() => {
@@ -74,15 +77,23 @@ const Terminal = ({
 
       if (match) {
         updateStats(match.effects)
-        setMessages(prev => [...prev, `> ${trimmed}`, match.response, '<em>Press Enter to continue...</em>'])
-        setWaitingForKeyPress(true)
-        setInput('')
-        return
-      } else {
-        setMessages(prev => [...prev, `> ${trimmed}`, `Unknown command: "${trimmed}"`])
+
+        const isStop = scenario.multiSelect && scenario.stopCommand?.toLowerCase() === match.input.toLowerCase()
+
+        const responseLines = [`> ${trimmed}`, match.response]
+
+        if (scenario.multiSelect && !isStop) {
+          setMessages(prev => [...prev, ...responseLines, '<em>Press Enter to choose again...</em>'])
+          setAwaitingRepeat(true)
+        } else {
+          setMessages(prev => [...prev, ...responseLines, '<em>Press Enter to continue...</em>'])
+          setWaitingForKeyPress(true)
+        }
+
         setInput('')
         return
       }
+
     }
 
     setMessages(prev => [...prev, `> ${trimmed}`])
@@ -98,19 +109,35 @@ const Terminal = ({
   }
 
   const handleKeyPress = (e: KeyboardEvent) => {
-    if (waitingForKeyPress && e.key === 'Enter') {
-      setWaitingForKeyPress(false)
-      setMessages(prev => [...prev, 'Moving to the next scene...'])
-      setTimeout(() => {
-        setInput('')
-        if (onNext) onNext()
-        inputRef.current?.focus()
-      }, 500)
+    if (e.key === 'Enter') {
+      if (awaitingRepeat) {
+        setAwaitingRepeat(false)
+        if (scenario) {
+          const optionLines = scenario.options.map((opt, i) => `${i + 1}. ${opt.input}`)
+          setMessages(prev => [...prev, '', ...optionLines])
+          // Delay to ensure input is re-enabled before focusing
+          setTimeout(() => inputRef.current?.focus(), 500)
+        }
+
+      }
+
+      if (waitingForKeyPress) {
+        setWaitingForKeyPress(false)
+        setMessages(prev => [...prev, 'Moving to the next scene...'])
+        setTimeout(() => {
+          setInput('')
+          if (onNext) onNext()
+          setTimeout(() => inputRef.current?.focus(), 500)
+        }, 500)
+
+      }
     }
   }
 
+
+
   useEffect(() => {
-    if (waitingForKeyPress) {
+    if (waitingForKeyPress || awaitingRepeat) {
       const handle = (e: KeyboardEvent) => {
         handleKeyPress(e)
       }
@@ -119,7 +146,7 @@ const Terminal = ({
         window.removeEventListener('keydown', handle)
       }
     }
-  }, [waitingForKeyPress])
+  }, [waitingForKeyPress, awaitingRepeat])
 
   const formatMessage = (msg: string) => {
     return msg.replace(/\b(help|start)\b/gi, '<strong>$1</strong>')
@@ -133,15 +160,15 @@ const Terminal = ({
     >
       <div className="rounded-xl bg-[#505050] backdrop-blur-md p-6">
         {/* Mac-style window buttons */}
-      <div className="absolute top-3 left-3 flex space-x-2">
-        <div
-          className="w-2.5 h-2.5 bg-red-500 rounded-full cursor-pointer hover:scale-110 transition-transform"
-          onClick={() => window.location.href = '/'} // or pass `onExit` as a prop
-        ></div>
-        <div className="w-2.5 h-2.5 bg-yellow-400 rounded-full"></div>
-        <div className="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
-      </div>
-        
+        <div className="absolute top-3 left-3 flex space-x-2">
+          <div
+            className="w-2.5 h-2.5 bg-red-500 rounded-full cursor-pointer hover:scale-110 transition-transform"
+            onClick={() => window.location.href = '/'}
+          ></div>
+          <div className="w-2.5 h-2.5 bg-yellow-400 rounded-full"></div>
+          <div className="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
+        </div>
+
         {/* Terminal Output */}
         <div className="h-[400px] overflow-y-auto whitespace-pre-wrap mb-4 mt-2 font-jetbrains text-[#FFE8D6] text-[17px] px-2">
           {messages.map((m, i) => (
@@ -162,7 +189,7 @@ const Terminal = ({
             placeholder="Enter your command..."
             autoFocus
             ref={inputRef}
-            disabled={waitingForKeyPress}
+            disabled={waitingForKeyPress || awaitingRepeat}
           />
         </form>
       </div>
