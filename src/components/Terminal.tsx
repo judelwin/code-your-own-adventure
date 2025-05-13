@@ -114,7 +114,7 @@ const Terminal = ({
         setAwaitingRepeat(false)
         if (scenario) {
           const optionLines = scenario.options.map((opt, i) => `${i + 1}. ${opt.input}`)
-          setMessages(prev => [...prev, '', ...optionLines])
+          setMessages(prev => [...prev, '\n', ...optionLines])
           // Delay to ensure input is re-enabled before focusing
           setTimeout(() => inputRef.current?.focus(), 500)
         }
