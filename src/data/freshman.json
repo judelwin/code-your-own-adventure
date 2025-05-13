@@ -119,6 +119,8 @@
             "title": "First Look Fair – McKeldin Mall",
             "description": "You arrive on McKeldin Mall, where rows of tents stretch into the distance. Clubs chant and toss stickers into the crowd. The heat is brutal, but the excitement is contagious.",
             "decision": "You pass the CS club tents. Select the name of a club to sign up (Career +5, Social +5, Energy -5). Select 'Stop' when you’re done.",
+            "multiSelect": true,
+            "stopCommand": "Stop",
             "options": [
                 {
                     "input": "App Dev Club",
@@ -211,12 +213,14 @@
                     "response": "You step back and take a deep breath. Your bag is full of stickers. You’ll check out the QR codes later."
                 }
             ]
-        },        
+        },
         {
             "id": "talking_to_upperclassman",
             "title": "Talking to an Upperclassman \u2013 Lounge in Iribe",
             "description": "After class, you head to IRB\u2019s lounge and pull out your CMSC131 notes. A junior sits across from you and nods. <em>'That class definitely kept me busy my first semester. Want any tips?'</em>",
             "decision": "Ask as many questions as you want. Each question costs 5 Energy.",
+            "multiSelect": true,
+            "stopCommand": "I'm good, thanks!",
             "options": [
                 {
                     "input": "How did you manage the workload?",
