@@ -10,6 +10,13 @@ A narrative-driven college simulator built with React, TypeScript, and Tailwind 
 
 Inspired by "Choose Your Own Adventure" narratives, the game encourages players to explore the many paths to growth in college—without prescribing a single "right" way to succeed.
 
+## Tech Stack
+
+- React
+- TypeScript
+- Tailwind CSS
+- JSON (for scenario logic and branching)
+  
 ## Features
 
 - Stat-based gameplay: Academic, Social, and Career axes
@@ -28,13 +35,6 @@ Inspired by "Choose Your Own Adventure" narratives, the game encourages players 
 
 ### In-Game Scenario
 ![Game Screen](./public/game-screen.png)
-
-## Tech Stack
-
-- React
-- TypeScript
-- Tailwind CSS
-- JSON (for scenario logic and branching)
 
 ## How to Run
 
