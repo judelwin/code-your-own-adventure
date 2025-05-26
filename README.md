@@ -1,54 +1,45 @@
-# React + TypeScript + Vite
+# Code Your Own Adventure
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A narrative-driven college simulator built with React, TypeScript, and Tailwind CSS.
 
-Currently, two official plugins are available:
+![Title Screen](./public/title-screen.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
 
-## Expanding the ESLint configuration
+**Code Your Own Adventure** is an interactive, text-based game that simulates the computer science college experience through a terminal-style interface. Built with storytelling and reflection in mind, the game guides players through realistic academic, social, and career decisions—complete with branching scenarios, stat tracking, and energy management.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Inspired by "Choose Your Own Adventure" narratives, the game encourages players to explore the many paths to growth in college—without prescribing a single "right" way to succeed.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Features
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Stat-based gameplay: Academic, Social, and Career axes
+- Energy system that constrains decision-making under realistic fatigue
+- Modular JSON-driven scenario engine with support for semester-based expansion
+- Terminal-style UI styled with Tailwind CSS
+- UMD-themed events grounded in real student experiences
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Screenshots
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### Title Screen
+![Title Screen](./public/title-screen.png)
+
+### How to Play
+![How to Play](./public/how-to-play-screen.png)
+
+### In-Game Scenario
+![Game Screen](./public/game-screen.png)
+
+## Tech Stack
+
+- React
+- TypeScript
+- Tailwind CSS
+- JSON (for scenario logic and branching)
+
+## How to Run
+
+```bash
+git clone https://github.com/your-username/code-your-own-adventure.git
+cd code-your-own-adventure
+npm install
+npm run dev
